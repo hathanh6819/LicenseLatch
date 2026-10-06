@@ -4,6 +4,7 @@
 
 - Network: GenLayer Studio Next (`chain_id 61997`)
 - Contract: [`0x67dFf8B0de804e414871F27baB1293fE189aeD9E`](https://explorer-studio-dev.genlayer.com/address/0x67dFf8B0de804e414871F27baB1293fE189aeD9E)
+- Production frontend: [license-latch-frontend.thanhha68199.workers.dev](https://license-latch-frontend.thanhha68199.workers.dev)
 - Deployment transaction: [`0x42ee3786...0592d`](https://explorer-studio-dev.genlayer.com/transactions/0x42ee3786a6f180407de50a4ff8e833f655ecd3c127426e072c841df0e770592d)
 - Policy publisher/test wallet A: `0x1D283b45974B0be9630DFD1deC6A62a9B72B2760`
 - Use requester/test wallet B: `0xf96Cf822F9f4e76956AB9fAAa22B3BdCD7b10aD6`

@@ -2,6 +2,7 @@
 
 LicenseLatch determines whether a proposed NFT use is compatible with an immutable commercial-use policy sealed by a publisher wallet. Deterministic code checks revenue, expiry, sublicensing and AI-training constraints; GenLayer validators handle only the bounded semantic comparison.
 
+**Live app:** [license-latch-frontend.thanhha68199.workers.dev](https://license-latch-frontend.thanhha68199.workers.dev)  
 **Live contract:** [`0x67dFf8B0de804e414871F27baB1293fE189aeD9E`](https://explorer-studio-dev.genlayer.com/address/0x67dFf8B0de804e414871F27baB1293fE189aeD9E) on GenLayer Studio Next. The finalized two-wallet transaction trail is in [`docs/LIVE_EVIDENCE.md`](docs/LIVE_EVIDENCE.md).
 
 ## Claim boundary
