@@ -1,52 +1,48 @@
-# Live E2E Evidence
-
-> Historical V1 evidence only. This deployment demonstrates the former publisher-declared registry and must not be used for V2 resubmission. V2 evidence will replace this file after both new contracts are deployed and the independent-authority plus downstream-consumption flow is executed.
-
-## V2 deployment (E2E pending)
-
-- LicenseLatch V2: [`0xa567Db6130c0F595f7A919917B5Cc98F865a7604`](https://explorer-studio-dev.genlayer.com/address/0xa567Db6130c0F595f7A919917B5Cc98F865a7604)
-- LicensedUseExecutor: [`0x5Ee91442bb33a3514A27dCb525aa3Bd841DF58f1`](https://explorer-studio-dev.genlayer.com/address/0x5Ee91442bb33a3514A27dCb525aa3Bd841DF58f1)
-- Finalized readback: main protocol version `2`; executor guard `0xa567db6130c0f595f7a919917b5cc98f865a7604`.
-- Status: deployment linkage verified; three-role transaction evidence still required.
+# LicenseLatch V2 — Live E2E Evidence
 
 ## Release identity
 
-- Network: GenLayer Studio Next (`chain_id 61997`)
-- Contract: [`0x67dFf8B0de804e414871F27baB1293fE189aeD9E`](https://explorer-studio-dev.genlayer.com/address/0x67dFf8B0de804e414871F27baB1293fE189aeD9E)
-- Production frontend: [license-latch-frontend.thanhha68199.workers.dev](https://license-latch-frontend.thanhha68199.workers.dev)
-- Deployment transaction: [`0x42ee3786...0592d`](https://explorer-studio-dev.genlayer.com/transactions/0x42ee3786a6f180407de50a4ff8e833f655ecd3c127426e072c841df0e770592d)
-- Policy publisher/test wallet A: `0x1D283b45974B0be9630DFD1deC6A62a9B72B2760`
-- Use requester/test wallet B: `0xf96Cf822F9f4e76956AB9fAAa22B3BdCD7b10aD6`
-- Date: 2026-10-06
+- Network: GenLayer Studio Dev (`chain_id 61997`)
+- LicenseLatch V2: [`0xa567Db6130c0F595f7A919917B5Cc98F865a7604`](https://explorer-studio-dev.genlayer.com/address/0xa567Db6130c0F595f7A919917B5Cc98F865a7604)
+- LicensedUseExecutor: [`0x5Ee91442bb33a3514A27dCb525aa3Bd841DF58f1`](https://explorer-studio-dev.genlayer.com/address/0x5Ee91442bb33a3514A27dCb525aa3Bd841DF58f1)
+- Publisher wallet A: `0x1D283b45974B0be9630DFD1deC6A62a9B72B2760`
+- Independent authority wallet B: `0xf96Cf822F9f4e76956AB9fAAa22B3BdCD7b10aD6`
+- SDK-generated requester/consumer wallet C: `0xfe792d6Caa97D727fF32483ecc397F96C8Ddeaf8`
+- Final state: 1 license, 3 requests, 2 verdicts, 1 permission, 1 consumed executor authorization
+- Result: **PASS**
 
-The deployer address is distinct from both test actors and receives no protocol role. Reviewers can repeat the journey with their own two wallets and independent records.
+The deployment wallet is not a protocol actor. All three test roles are distinct. Fixture sources and their synthetic status are documented in [`TEST_RESOURCE_MANIFEST.md`](TEST_RESOURCE_MANIFEST.md).
 
 ## Finalized transaction trail
 
-| # | Actor | Operation and verified outcome | Explorer |
+| # | Actor | Operation and verified readback | Explorer |
 |---:|---|---|---|
-| 1 | Wallet A | Seal primary policy; license 1 becomes `ACTIVE` | [`0xf0932d1d...28f61`](https://explorer-studio-dev.genlayer.com/transactions/0xf0932d1d44607b96960ef4260ffeb0dd845cdf8340d254609fa2e32855728f61) |
-| 2 | Wallet B | Submit compatible apparel use; request 1 becomes `SEMANTIC_PENDING` | [`0x4be66fdf...cd758`](https://explorer-studio-dev.genlayer.com/transactions/0x4be66fdf8f738588ee50273e23286ea594fac4e90a241560a22953af50fcd758) |
-| 3 | Wallet A | Assess compatible use; `COMPATIBLE`, request `APPROVED`, permission 1 issued | [`0x56d18124...fc3bd`](https://explorer-studio-dev.genlayer.com/transactions/0x56d1812466ffea2118c2704ea488374c49ac38054572160b7cc28384162fc3bd) |
-| 4 | Wallet B | Replay assessment rejected with `REQUEST_NOT_ASSESSABLE`; no mutation | [`0x94dba003...cfa764`](https://explorer-studio-dev.genlayer.com/transactions/0x94dba003edcbb0b553f34f5c5924e2e7a02c467a32d36b9025d2c1ed2acfa764) |
-| 5 | Wallet B | Revenue 30,000 exceeds 25,000 cap; deterministic `REJECTED`, no AI verdict | [`0x148285fa...b9fb87`](https://explorer-studio-dev.genlayer.com/transactions/0x148285fa3e09e26f3b265fbd9ccb1c512a50be560cffa0c8e033a366d9b9fb87) |
-| 6 | Wallet B | Sublicensing requested against prohibition; deterministic `REJECTED` | [`0x1d9bd04c...1457d5`](https://explorer-studio-dev.genlayer.com/transactions/0x1d9bd04ca1ce2ba7b2187c7d684dca6ae940a72ce799ee033446f46b841457d5) |
-| 7 | Wallet B | Submit disguised betting-platform campaign | [`0x9ea336f7...71f62`](https://explorer-studio-dev.genlayer.com/transactions/0x9ea336f729bc673d8d577605f57101364faeecfa8bba676a2e40840aa0471f62) |
-| 8 | Wallet A | Semantic assessment returns `INCOMPATIBLE` with industry/purpose conflict; no permission | [`0x7265ecfd...3bc22`](https://explorer-studio-dev.genlayer.com/transactions/0x7265ecfd627b96c58e98f74422ea4553d50b3cd2b2bbe3b4ca672ca04ab3bc22) |
-| 9 | Wallet A | Seal second policy for deactivation-race test | [`0x1668d843...6d55d`](https://explorer-studio-dev.genlayer.com/transactions/0x1668d84374053b7d416772a86966559d12f1c4714dc175d548b74cc08d96d55d) |
-| 10 | Wallet B | Submit request 5 while second policy is active | [`0x12b204a6...d0270`](https://explorer-studio-dev.genlayer.com/transactions/0x12b204a6cd9d7f78b59f28a317b724b79ddd36f0dc81abf0514584b0f96d0270) |
-| 11 | Wallet B | Unauthorized deactivation rejected with `ONLY_LICENSE_PUBLISHER`; policy unchanged | [`0x0c575d01...cadcd`](https://explorer-studio-dev.genlayer.com/transactions/0x0c575d014282cb9c2ee5263b453c454855054c24b575b7bf8973c2efd36cadcd) |
-| 12 | Wallet A | Publisher deactivates second policy; status `INACTIVE`, epoch 2 | [`0xd7f95d0e...6e694`](https://explorer-studio-dev.genlayer.com/transactions/0xd7f95d0e6b640e499e77eaa687babdc43dfe1b0ed201de34b8237b2fb9c6e694) |
-| 13 | Wallet B | Pending assessment rejected with `LICENSE_NOT_ACTIVE`; no verdict/permission created | [`0xe4ced720...8197a`](https://explorer-studio-dev.genlayer.com/transactions/0xe4ced720d4925ea54d708a1d038d6238721d5067904717aed495bbde0a28197a) |
+| 1 | Publisher A | Propose policy; status `AUTHORITY_PENDING`, epoch 1 | [`0x03053a77…6b9408`](https://explorer-studio-dev.genlayer.com/transactions/0x03053a7789c2e29a271f5e92ff09d6f471876e925e0ff90e94b9c765106b9408) |
+| 2 | Requester C | Unauthorized authority confirmation; policy remains pending | [`0x096ac971…f9ef5`](https://explorer-studio-dev.genlayer.com/transactions/0x096ac971a5f0f384d8062a06a8ebdb8534179fb7f3d69229ed9ef43f9bef9ef5) |
+| 3 | Authority B | Confirm exact attestation; policy becomes `ACTIVE`, epoch 2 | [`0xb0fde6e3…520fe`](https://explorer-studio-dev.genlayer.com/transactions/0xb0fde6e31551f765128ff30a8e21ced5f4de5431c9e08a8df28dccfde61520fe) |
+| 4 | Requester C | Submit compatible consumer-bound request | [`0x1c87ab9c…bc33b`](https://explorer-studio-dev.genlayer.com/transactions/0x1c87ab9c9e7aba9515d2323ce3393cc86475592c4b06f97a03c054e1963bc33b) |
+| 5 | Publisher A | Consensus returns compatible; permission 1 queued for executor | [`0xe0d0fded…28bb3`](https://explorer-studio-dev.genlayer.com/transactions/0xe0d0fded078fe1cb80a302e9bde1cede18137d1cae6793ecad39b9bc9e128bb3) |
+| 6 | Authority B | Foreign consumer attempt rejected; authorization remains `ACTIVE` | [`0xad852afe…0b321`](https://explorer-studio-dev.genlayer.com/transactions/0xad852afea04cba142c6402503fbc49be8dee9b9618dc102bd756cea1b040b321) |
+| 7 | Consumer C | Bound consumer consumes permission; executor becomes `CONSUMED` | [`0x2d8c862d…e9ab3`](https://explorer-studio-dev.genlayer.com/transactions/0x2d8c862d6b2726039b841c54fa95f784b4513530a3bf4b9f01fe965fbb6e9ab3) |
+| 8 | Consumer C | Replay consume rejected; state remains `CONSUMED` | [`0xce794754…b5b50`](https://explorer-studio-dev.genlayer.com/transactions/0xce794754a64a45f23daa9935eff67e23ae2ab6d9ffd4bb11c502ba032c2b5b50) |
+| 9 | Requester C | Revenue exceeds cap; deterministic `REVENUE_CAP_EXCEEDED` | [`0x3a338213…78a17`](https://explorer-studio-dev.genlayer.com/transactions/0x3a338213001463dbc66a3498e4ca52676c5357a65559cb8aba45d51d4a378a17) |
+| 10 | Requester C | Submit disguised betting-platform use | [`0xe40ad8ce…979bd`](https://explorer-studio-dev.genlayer.com/transactions/0xe40ad8ce7eee98ff7fdcea1efb5a2a6e7aa3c881517d99c889768367be4979bd) |
+| 11 | Authority B | Semantic review rejects conflict; no second permission | [`0x39cb4654…5242f`](https://explorer-studio-dev.genlayer.com/transactions/0x39cb46546033191e6bed41a59ec78fbfee2a91b8944ae397a8a7a579a0f25242f) |
 
-## Final readback
+## Critical finalized readbacks
 
-`get_counts()` returned `2 licenses / 5 requests / 2 verdicts / 1 permission`.
+- Main protocol: version `2`, independent wallet attestation, finalized cross-contract authorization.
+- Executor guard: `0xa567db6130c0f595f7a919917b5cc98f865a7604`.
+- Permission 1 binds consumer `0xfe792d6caa97d727ff32483ecc397f96c8ddeaf8` and executor `0x5ee91442bb33a3514a27dcb525aa3bd841df58f1`.
+- Executor authorization 1 reached `ACTIVE`, rejected a foreign caller, then reached `CONSUMED` from the bound consumer.
+- Replay preserved `CONSUMED`; it did not create another authorization.
+- Adversarial betting request ended `REJECTED`; final permission count stayed 1.
 
-- License 1 remains `ACTIVE`; request 1 is `APPROVED` with verdict `COMPATIBLE` and permission 1 bound to both policy and request digests.
-- Requests 2 and 3 are deterministically `REJECTED` for revenue-cap and sublicensing violations and created no semantic verdict.
-- Request 4 is `REJECTED`; verdict 2 is `INCOMPATIBLE` with `INDUSTRY_RESTRICTION` and `PURPOSE_MISMATCH`.
-- License 2 is `INACTIVE`, epoch 2. Its pre-existing request 5 remains `SEMANTIC_PENDING`; assessment after deactivation created no positive state.
-- Replay and unauthorized operations finalized with explicit safe errors and did not mutate protected state.
+## Reproduce
 
-Programmatic SDK E2E result: **PASS**. Browser-wallet automation is not claimed. All policy and use fixtures are synthetic and their limitations are documented in `TEST_RESOURCE_MANIFEST.md`.
+```powershell
+node scripts/create_test_wallet.mjs
+node scripts/run_live_e2e.mjs 0xa567Db6130c0F595f7A919917B5Cc98F865a7604 0x5Ee91442bb33a3514A27dCb525aa3Bd841DF58f1
+```
+
+The runner prompts invisibly for publisher and authority keys and reads the SDK-generated requester key from a Git-ignored local file.

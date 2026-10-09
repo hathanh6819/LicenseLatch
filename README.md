@@ -2,7 +2,7 @@
 
 LicenseLatch V2 turns an authority-confirmed NFT commercial-use policy into a consumer-bound downstream authorization. A publisher may propose terms, but the policy remains `AUTHORITY_PENDING` until a different authority wallet confirms the exact attestation digest. GenLayer consensus then compares an intended use with those immutable terms. A compatible result is finalized into a separate `LicensedUseExecutor`, where only the bound consumer can consume it, once, before expiry.
 
-The previous V1 deployment remains historical evidence. V2 requires fresh deployments and fresh E2E evidence before resubmission.
+**Live V2 contracts:** [LicenseLatch](https://explorer-studio-dev.genlayer.com/address/0xa567Db6130c0F595f7A919917B5Cc98F865a7604) · [LicensedUseExecutor](https://explorer-studio-dev.genlayer.com/address/0x5Ee91442bb33a3514A27dCb525aa3Bd841DF58f1) · [finalized E2E evidence](docs/LIVE_EVIDENCE.md).
 
 ## Claim boundary
 
@@ -42,7 +42,7 @@ The LicenseLatch deployer receives no role. Publisher, authority, and requester/
 .\verify.ps1
 ```
 
-Current local results: 16 contract/adversarial tests pass, including independent-authority gating, digest/epoch binding, deterministic failure, semantic conflict, finalized dispatch, downstream role enforcement, and replay prevention. The frontend production build also passes.
+Current results: 16 contract/adversarial tests and 4 frontend state tests pass; both contracts pass GenVM lint and the production build succeeds. Live three-wallet E2E also passed independent-authority gating, deterministic failure, semantic conflict, finalized dispatch, downstream enforcement, successful one-time consumption, and replay prevention.
 
 ## Repository map
 
