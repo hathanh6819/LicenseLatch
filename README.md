@@ -1,35 +1,40 @@
-# LicenseLatch — NFT Commercial Use Permission Gate
+# LicenseLatch — Attested NFT Permission Gateway
 
-LicenseLatch determines whether a proposed NFT use is compatible with an immutable commercial-use policy sealed by a publisher wallet. Deterministic code checks revenue, expiry, sublicensing and AI-training constraints; GenLayer validators handle only the bounded semantic comparison.
+LicenseLatch V2 turns an authority-confirmed NFT commercial-use policy into a consumer-bound downstream authorization. A publisher may propose terms, but the policy remains `AUTHORITY_PENDING` until a different authority wallet confirms the exact attestation digest. GenLayer consensus then compares an intended use with those immutable terms. A compatible result is finalized into a separate `LicensedUseExecutor`, where only the bound consumer can consume it, once, before expiry.
 
-**Live app:** [license-latch-frontend.thanhha68199.workers.dev](https://license-latch-frontend.thanhha68199.workers.dev)  
-**Live contract:** [`0x67dFf8B0de804e414871F27baB1293fE189aeD9E`](https://explorer-studio-dev.genlayer.com/address/0x67dFf8B0de804e414871F27baB1293fE189aeD9E) on GenLayer Studio Next. The finalized two-wallet transaction trail is in [`docs/LIVE_EVIDENCE.md`](docs/LIVE_EVIDENCE.md).
+The previous V1 deployment remains historical evidence. V2 requires fresh deployments and fresh E2E evidence before resubmission.
 
 ## Claim boundary
 
-An `APPROVED` record means only “compatible with the exact publisher-sealed policy inside LicenseLatch.” It is not proof of NFT ownership, copyright ownership, legal authority, enforceability, or real-world compliance.
+The protocol proves which wallets proposed and independently attested a policy, which public evidence URI/digest they bound, and whether a downstream executor accepted and consumed a permission. It does **not** independently prove copyright ownership, legal validity of the evidence, or enforceability outside integrated contracts.
 
-## Why GenLayer
-
-Code can compare caps and flags, but cannot reliably decide whether a “lifestyle rewards campaign” is actually prohibited gambling promotion. Validators compare the exact sealed policy and exact request. The contract strictly validates the structured verdict and creates a permission record only for `COMPATIBLE` consensus.
-
-## Architecture
+## V2 lifecycle
 
 ```text
-immutable policy -> bound request -> deterministic gate
-                                   -> semantic verdict -> permission record
+publisher proposal -> AUTHORITY_PENDING
+independent authority confirmation -> ACTIVE
+requester submits consumer-bound use -> deterministic gate
+GenLayer compatibility consensus -> finalized cross-contract dispatch
+LicensedUseExecutor -> one-time consume by bound consumer
 ```
 
-There is no owner, constructor role, custody, admin allowlist, mutable policy, backend authority, or model-controlled transfer. The deployer receives no protocol capability. Any reviewer can use their own wallet to publish a separate policy and a distinct wallet to request a use.
+## Deployment order
+
+The two contracts are intentionally circularly bound at configuration time, so deploy them in this order:
+
+1. Deploy `contracts/license_latch.py` (no constructor arguments).
+2. Deploy `contracts/licensed_use_executor.py` with the LicenseLatch address as `guard`.
+3. When proposing a license, supply the executor address, an independent authority wallet, a public HTTPS authority-evidence URL, and its `sha256:` digest.
+
+The LicenseLatch deployer receives no role. Publisher, authority, and requester/consumer roles come from the wallets that participate in each policy.
 
 ## Reviewer path
 
-1. Deploy `contracts/license_latch.py` with no constructor inputs.
-2. Open License Library and connect any Studio Next wallet.
-3. Publish a policy; the UI creates a certificate card automatically.
-4. Connect a different wallet, select the card, and submit a bounded use request.
-5. Run compatibility review. A compatible request produces `AUTHORIZED`; prohibited use produces `OUTSIDE LICENSE`.
-6. Inspect Decision Ledger for deterministic failures and semantic verdicts. No manual record IDs are required.
+1. Connect any wallet and create a proposal on **Propose policy**.
+2. Connect the assigned, different authority wallet on **Authority desk**, inspect the linked evidence, and confirm the digest.
+3. Connect a third wallet on **Request a use**, select the active policy, and submit a consumer-bound request.
+4. Run consensus review. A compatible result dispatches a finalized authorization to the configured executor.
+5. In Studio or an integrating app, call `consume_authorization(permission_id, receipt)` from the exact consumer wallet. A second consume and any foreign wallet fail closed.
 
 ## Verification
 
@@ -37,23 +42,13 @@ There is no owner, constructor role, custody, admin allowlist, mutable policy, b
 .\verify.ps1
 ```
 
-Current local results:
-
-- Contract/adversarial tests: 21 passed
-- GenVM lint: 3 checks passed
-- Frontend state tests: 3 passed
-- TypeScript/Vite production build: passed
-
-Live SDK E2E passed with 2 licenses, 5 requests, 2 semantic verdicts, and 1 permission. It covers compatible authorization, two deterministic failures, adversarial semantic conflict, replay, unauthorized deactivation, and deactivation-race safety. Browser-wallet automation is not claimed.
+Current local results: 16 contract/adversarial tests pass, including independent-authority gating, digest/epoch binding, deterministic failure, semantic conflict, finalized dispatch, downstream role enforcement, and replay prevention. The frontend production build also passes.
 
 ## Repository map
 
-- `contracts/license_latch.py` — deployable contract
-- `tests/` — lifecycle, binding and adversarial tests
-- `frontend/` — responsive licensing-desk client
-- `scripts/run_live_e2e.mjs` — hidden-key two-wallet live runner
-- `docs/ARCHITECTURE.md` — proof and authority boundaries
-- `docs/TEST_RESOURCE_MANIFEST.md` — exact synthetic fixture provenance
-- `docs/THREAT_MODEL.md` — attacks and safe failure states
-- `docs/VERIFICATION.md` — local/live release gates
-- `docs/LIVE_EVIDENCE.md` — finalized deployment, transaction trail, and readbacks
+- `contracts/license_latch.py` — authority-gated policy and consensus coordinator
+- `contracts/licensed_use_executor.py` — guarded, consumer-bound one-time executor
+- `tests/` — lifecycle and adversarial coverage
+- `frontend/` — proposal, authority, request, and ledger UI
+- `docs/MORE_INFORMATION_RESUBMISSION.md` — point-by-point steward response
+- `docs/LIVE_EVIDENCE.md` — update after V2 deployment and E2E

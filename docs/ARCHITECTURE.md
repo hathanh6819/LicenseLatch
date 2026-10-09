@@ -1,31 +1,31 @@
-# Architecture
+# Architecture V2
 
 ## Proof obligation
 
-LicenseLatch proves only that a request is compatible with the exact policy bytes sealed by a named publisher wallet. It does not prove NFT ownership, legal authority, copyright ownership, or enforceability.
-
-## Distinct topology
+LicenseLatch proves a protocol authority chain: a publisher proposed exact policy bytes, a different assigned authority wallet confirmed an exact evidence digest, GenLayer reached a bounded compatibility verdict, and a guarded executor accepted a consumer-bound permission. Public evidence remains reviewer-verifiable; the protocol does not independently prove copyright ownership or legal validity.
 
 ```text
-publisher wallet -> immutable license registry
-requester wallet -> bound use-request registry
-                      | deterministic bounds
-                      v
-                semantic compatibility consensus
-                      |
-           verdict registry -> permission record
+publisher -> pending policy + evidence digest
+authority -> exact-digest confirmation -> active policy
+requester -> intended use + bound consumer
+              | deterministic gates
+              v
+          GenLayer consensus
+              | finalized cross-contract message
+              v
+LicensedUseExecutor -> bound consumer -> one-time consumption
 ```
 
-This is not a revision/activation graph. Policies are immutable records. Requests are independent objects. Verdicts bind both digests. Only a compatible verdict creates a non-transferable protocol permission record.
-
-## Authority table
+## Enforcement boundaries
 
 | Claim | Authority/evidence | Enforcement |
 |---|---|---|
-| What this publisher permits | Exact policy bytes signed by publisher transaction | Immutable digest and publisher address |
-| Declared intended use | Exact requester-authored request bytes | Request digest and requester address |
-| Numeric/boolean compatibility | On-chain fields | Deterministic checks before AI |
-| Semantic compatibility | Both bounded texts | GenLayer comparative consensus |
-| Legal rights / NFT ownership | Not established | Explicitly outside claim boundary |
+| Proposed terms | Publisher transaction | Immutable policy digest |
+| Authority consent | Distinct authority transaction | Exact attestation digest and epoch |
+| Evidence reference | HTTPS URI + SHA-256 digest | Included in policy digest |
+| Deterministic constraints | Structured on-chain fields | Rejected before AI |
+| Semantic compatibility | Exact policy and request | Comparative consensus, strict schema |
+| Downstream permission | Finalized guard-to-executor call | Consumer-bound, expiring, one-time consume |
+| Copyright/legal ownership | External evidence and law | Explicitly not independently proven |
 
-The deployer has no stored role. Any wallet can publish a policy; a distinct wallet can submit a request. Any wallet can trigger assessment because triggering consensus grants no discretionary power.
+The deployer receives no stored role. Triggering assessment grants no discretionary authority. The executor rejects any caller other than its configured LicenseLatch guard, and authorization consumption rejects foreign wallets, receipt mismatches, expiry, and replay.

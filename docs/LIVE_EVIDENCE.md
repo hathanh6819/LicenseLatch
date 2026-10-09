@@ -1,5 +1,7 @@
 # Live E2E Evidence
 
+> Historical V1 evidence only. This deployment demonstrates the former publisher-declared registry and must not be used for V2 resubmission. V2 evidence will replace this file after both new contracts are deployed and the independent-authority plus downstream-consumption flow is executed.
+
 ## Release identity
 
 - Network: GenLayer Studio Next (`chain_id 61997`)

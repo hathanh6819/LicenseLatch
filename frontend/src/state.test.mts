@@ -1,5 +1,5 @@
 import test from'node:test';import assert from'node:assert/strict';import{canAssess,displayStatus,stamp,tone}from'./state.ts';
 test('assessment actions follow authoritative state',()=>{assert.equal(canAssess('SEMANTIC_PENDING'),true);assert.equal(canAssess('CONSENSUS_UNRESOLVED'),true);assert.equal(canAssess('REJECTED'),false);assert.equal(canAssess('APPROVED'),false)});
-test('permission stamps never imply a positive unresolved result',()=>{assert.equal(stamp('APPROVED'),'AUTHORIZED');assert.equal(stamp('REJECTED'),'OUTSIDE LICENSE');assert.equal(stamp('CONSENSUS_UNRESOLVED'),'CLARIFICATION REQUIRED')});
+test('permission stamps distinguish dispatch from consumption',()=>{assert.equal(stamp('APPROVED'),'DISPATCHED');assert.equal(stamp('AUTHORITY_PENDING'),'AWAITING AUTHORITY');assert.equal(stamp('REJECTED'),'OUTSIDE LICENSE');assert.equal(stamp('CONSENSUS_UNRESOLVED'),'CLARIFICATION REQUIRED')});
 test('tones are explicit',()=>{assert.equal(tone('APPROVED'),'approved');assert.equal(tone('REJECTED'),'rejected');assert.equal(tone('SEMANTIC_PENDING'),'pending')});
 test('pending request under inactive policy is never shown as reviewable',()=>{const s=displayStatus('SEMANTIC_PENDING','INACTIVE');assert.equal(s,'POLICY_INACTIVE');assert.equal(stamp(s),'POLICY INACTIVE');assert.equal(tone(s),'rejected')});
