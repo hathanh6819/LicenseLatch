@@ -2,6 +2,13 @@
 
 > Historical V1 evidence only. This deployment demonstrates the former publisher-declared registry and must not be used for V2 resubmission. V2 evidence will replace this file after both new contracts are deployed and the independent-authority plus downstream-consumption flow is executed.
 
+## V2 deployment (E2E pending)
+
+- LicenseLatch V2: [`0xa567Db6130c0F595f7A919917B5Cc98F865a7604`](https://explorer-studio-dev.genlayer.com/address/0xa567Db6130c0F595f7A919917B5Cc98F865a7604)
+- LicensedUseExecutor: [`0x5Ee91442bb33a3514A27dCb525aa3Bd841DF58f1`](https://explorer-studio-dev.genlayer.com/address/0x5Ee91442bb33a3514A27dCb525aa3Bd841DF58f1)
+- Finalized readback: main protocol version `2`; executor guard `0xa567db6130c0f595f7a919917b5cc98f865a7604`.
+- Status: deployment linkage verified; three-role transaction evidence still required.
+
 ## Release identity
 
 - Network: GenLayer Studio Next (`chain_id 61997`)
