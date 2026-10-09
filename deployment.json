@@ -9,5 +9,7 @@
   "contract_explorer": "https://explorer-studio-dev.genlayer.com/address/0xa567Db6130c0F595f7A919917B5Cc98F865a7604",
   "executor_explorer": "https://explorer-studio-dev.genlayer.com/address/0x5Ee91442bb33a3514A27dCb525aa3Bd841DF58f1",
   "frontend_url": "https://license-latch-frontend.thanhha68199.workers.dev",
+  "cloudflare_version_id": "cf6179cc-d3dc-4290-9b5d-55de475f6d18",
+  "frontend_verification": {"main_address": true, "executor_address": true, "execution_desk": true},
   "e2e": {"status": "PASS", "publisher": "0x1D283b45974B0be9630DFD1deC6A62a9B72B2760", "authority": "0xf96Cf822F9f4e76956AB9fAAa22B3BdCD7b10aD6", "requester_consumer": "0xfe792d6Caa97D727fF32483ecc397F96C8Ddeaf8", "licenses": 1, "requests": 3, "verdicts": 2, "permissions": 1, "consumed_authorizations": 1, "evidence": "docs/LIVE_EVIDENCE.md"}
 }

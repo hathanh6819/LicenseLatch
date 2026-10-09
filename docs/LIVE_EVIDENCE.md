@@ -5,11 +5,14 @@
 - Network: GenLayer Studio Dev (`chain_id 61997`)
 - LicenseLatch V2: [`0xa567Db6130c0F595f7A919917B5Cc98F865a7604`](https://explorer-studio-dev.genlayer.com/address/0xa567Db6130c0F595f7A919917B5Cc98F865a7604)
 - LicensedUseExecutor: [`0x5Ee91442bb33a3514A27dCb525aa3Bd841DF58f1`](https://explorer-studio-dev.genlayer.com/address/0x5Ee91442bb33a3514A27dCb525aa3Bd841DF58f1)
+- Production frontend: [license-latch-frontend.thanhha68199.workers.dev](https://license-latch-frontend.thanhha68199.workers.dev) — Cloudflare version `cf6179cc-d3dc-4290-9b5d-55de475f6d18`
 - Publisher wallet A: `0x1D283b45974B0be9630DFD1deC6A62a9B72B2760`
 - Independent authority wallet B: `0xf96Cf822F9f4e76956AB9fAAa22B3BdCD7b10aD6`
 - SDK-generated requester/consumer wallet C: `0xfe792d6Caa97D727fF32483ecc397F96C8Ddeaf8`
 - Final state: 1 license, 3 requests, 2 verdicts, 1 permission, 1 consumed executor authorization
 - Result: **PASS**
+
+The deployed JavaScript bundle was fetched back from Cloudflare and verified to contain both V2 addresses and the downstream Execution Desk.
 
 The deployment wallet is not a protocol actor. All three test roles are distinct. Fixture sources and their synthetic status are documented in [`TEST_RESOURCE_MANIFEST.md`](TEST_RESOURCE_MANIFEST.md).
 
